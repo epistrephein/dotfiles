@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gem "irb", "~> 1.18"
+gem "logger", "~> 1.7"
+
+group :production do
+end
+
+group :test do
+  gem "rubocop"
+end
+
+group :development do
+end
