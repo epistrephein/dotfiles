@@ -22,10 +22,16 @@ alias rrf='bundle exec rspec --fail-fast'
 alias rro='bundle exec rspec --only-failures'
 alias rrn='bundle exec rspec --next-failure'
 alias rrr='bundle exec rspec; bundle exec rubocop'
-alias rrrb='bundle exec rspec; bundle exec rubocop; bundle exec brakeman -q --no-pager'
+alias rrrb='bundle exec rspec; bundle exec rubocop; bin/brakeman --no-summary'
 
 alias rk='bundle exec rake'
 alias rkt='bundle exec rake -T'
+
+alias creds='EDITOR="code --wait" bin/rails credentials:edit'
+
+rubylatest() {
+  mise ls ruby --installed --json | jq -r '.[-1].version'
+}
 
 rubyver() {
   if [ -f ".ruby-version" ]; then
@@ -35,7 +41,7 @@ rubyver() {
     echo "$1" > .ruby-version
     echo ".ruby-version created with version: $1"
   else
-    RB_VERSION=$(grep '^ruby ' "$HOME/.tool-versions" | cut -d' ' -f2)
+    RB_VERSION=$(rubylatest)
     echo "$RB_VERSION" > .ruby-version
     echo ".ruby-version created with version: $RB_VERSION"
   fi

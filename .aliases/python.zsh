@@ -16,6 +16,10 @@ alias mkjup='pip install -U ipykernel'
 
 alias req='pip install -r requirements.txt'
 
+pythonlatest() {
+  mise ls python --installed --json | jq -r '.[-1].version'
+}
+
 pyver() {
   if [ -f ".python-version" ]; then
     echo "Warning: .python-version already exists with version: $(cat .python-version)" >&2
@@ -23,7 +27,7 @@ pyver() {
     echo "$1" > .python-version
     echo ".python-version created with version: $1"
   else
-    PY_VERSION=$(grep '^python ' "$HOME/.tool-versions" | cut -d' ' -f2)
+    PY_VERSION=$(pythonlatest)
     echo "$PY_VERSION" > .python-version
     echo ".python-version created with version: $PY_VERSION"
   fi
