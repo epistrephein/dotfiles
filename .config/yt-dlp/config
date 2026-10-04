@@ -1,0 +1,10 @@
+--force-ipv4
+--continue
+--ignore-errors
+--embed-metadata
+--xattrs
+--restrict-filenames
+--fragment-retries 'infinite'
+--merge-output-format mp4
+--format "bestvideo[ext=mp4][vcodec^=avc1][protocol^=http]+bestaudio[ext=m4a]/best[ext=mp4][vcodec^=avc1][protocol^=http]/best"
+--output "%(uploader)s-%(upload_date)s-%(id)s-%(title).150B.%(ext)s"
